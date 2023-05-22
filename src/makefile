@@ -6,7 +6,7 @@ master.img:boot.bin
 	yes | bximage -q -hd=16 -func=create -sectsize=512 -imgmode=flat master.img 
 	dd if=boot.bin of=master.img bs=512 count=1 conv=notrunc
 
-,PHINY: usb
+.PHINY: usb
 usb: boot.bin /dev/sdb
 	sudo dd if=/dev/sdb of=tmp.bin bs=512 count=1 conv=notrunc	
 	cp tmp.bin usb.bin
