@@ -14,15 +14,16 @@ mov sp,0x7c00
 mov si,booting
 call print
 
-xchg bx,bx   ; bochs 魔数断点
-
 mov edi,0x1000   ; 读取的目标内存
-mov ecx,0        ; 起始扇区
-mov bl,1         ; 扇区数量
+mov ecx,2        ; 起始扇区
+mov bl,4         ; 扇区数量
  
 call read_disk
 
-xchg bx,bx   ; bochs 魔数断点
+cmp word [0x1000],0x55aa
+jnz error
+
+jmp 0:0x1002
 
 ; 阻塞
 jmp $
@@ -30,7 +31,7 @@ jmp $
 read_disk:
     ; 设置读写扇区的数量
     mov dx,0x1f2
-    mov al,bl
+    mov al,cl
     out dx,al
     
     inc dx      ; 0x1f3
@@ -106,10 +107,17 @@ print:
     inc si
     jmp .next
 .done:    
-    ret
+    ret    
 
 booting:
     db "booting AiOS", 10, 13, 0 ; \n\r
+
+error:
+    mov si,.msg
+    call print
+    hlt ; 让 CPU 停止
+    jmp $
+    .msg db"booting Error!!!", 10, 13, 0    
 
 times 510 - ($ - $$) db 0
 
