@@ -31,7 +31,7 @@ jmp $
 read_disk:
     ; 设置读写扇区的数量
     mov dx,0x1f2
-    mov al,cl
+    mov al,bl
     out dx,al
     
     inc dx      ; 0x1f3
