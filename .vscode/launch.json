@@ -5,13 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "onix - Build and debug kernel",
+            "name": "AiOS - Build and debug kernel",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/kernel.bin",
+            "program": "${workspaceFolder}/AiOS/build/kernel.bin",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/src",
+            "cwd": "${workspaceFolder}/AiOS/src",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
@@ -30,58 +30,7 @@
             ],
             "miDebuggerPath": "/usr/bin/gdb"
         },
-        {
-            "name": "vmware - Build and debug kernel",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/build/kernel.bin",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/src",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "miDebuggerServerAddress": "remotehost:1234", // /etc/hosts
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                },
-                {
-                    "description": "Set Disassembly Flavor to Intel",
-                    "text": "-gdb-set disassembly-flavor intel",
-                    "ignoreFailures": true
-                }
-            ],
-            "miDebuggerPath": "/usr/bin/gdb",
-        },
-        {
-            "name": "AiOS - Build and debug app",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/build/builtin/${fileBasenameNoExtension}.out",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/src",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                },
-                {
-                    "description": "Set Disassembly Flavor to Intel",
-                    "text": "-gdb-set disassembly-flavor intel",
-                    "ignoreFailures": true
-                }
-            ],
-            "preLaunchTask": "make: build onix app",
-            "miDebuggerPath": "/usr/bin/gdb"
-        },
+
         {
             "name": "gcc - Build and debug active file",
             "type": "cppdbg",
@@ -108,6 +57,7 @@
             "preLaunchTask": "C/C++: gcc build active file",
             "miDebuggerPath": "/usr/bin/gdb"
         },
+
         {
             "name": "nasm - Build and debug active file",
             "type": "cppdbg",
