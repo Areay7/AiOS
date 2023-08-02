@@ -63,26 +63,27 @@ $(BUILD)/master.img: $(BUILD)/boot/boot.bin \
 
 test: $(BUILD)/master.img
 
-.PHINY: clean
+.PHONY: clean
 clean:
 	rm -rf $(BUILD)
 
-.PHINY: bochs
+.PHONY: bochs
 bochs: $(BUILD)/master.img
 	bochs -q -f ../bochs/bochsrc
 
-.PHINY: bochsg
+.PHONY: bochsg
 bochsg: $(BUILD)/master.img
-	bochs-gdb -q -f ../bochs/bochsrc.gdb 
+	bochs-gdb -q -f ../bochs/bochsrc.gdb
 
-.PHINY: qemu
+
+.PHONY: qemu
 qemu: $(BUILD)/master.img
 	qemu-system-i386 \
 	-m 32M \
 	-boot c \
 	-hda $<
 
-.PHINY: qemug
+.PHONY: qemug
 qemug: $(BUILD)/master.img
 	qemu-system-i386 \
 	-s -S \
@@ -90,4 +91,9 @@ qemug: $(BUILD)/master.img
 	-boot c \
 	-hda $<
 
+ $(BUILD)/master.vmdk: $(BUILD)/master.img
+	qemu-img convert -pO vmdk $< $@
+
+.PHONY: vmdk
+vmdk: $(BUILD)/master.vmdk
 

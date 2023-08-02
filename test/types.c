@@ -15,7 +15,7 @@ typedef struct descriptor /* 共 8 个字节 */
     unsigned char big : 1;         // 32 位 还是 16 位;
     unsigned char granularity : 1; // 粒度 4KB 或 1B
     unsigned char base_high;       // 基地址 24 ~ 31 位
-}_packed descriptor;
+}__attribute__((packed)) descriptor;
 
 int main()
 {
