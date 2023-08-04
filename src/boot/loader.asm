@@ -1,13 +1,13 @@
 [org 0x1000]
 
-dd 0x55aa; 魔术 用于判断错误
+dd 0x55aa; 魔数 用于判断错误
 
 
 ; 打印字符串
 mov si,loading
 call print
 
-xchg bx,bx  ; 断点  
+; xchg bx,bx  ; 断点  
 
 detect_memory:
     xor ebx,ebx ; 将 ebx 置为0
@@ -34,7 +34,7 @@ detect_memory:
     add di,cx
 
     ; 将结构体数量加一
-    inc word [ards_count]
+    inc dword [ards_count]
 
     cmp ebx,0
     jnz .next
@@ -91,7 +91,7 @@ error:
     call print
     hlt ; 让 CPU 停止
     jmp $
-    .msg db"Loading Error!!!", 10, 13, 0  
+    .msg db "Loading Error!!!", 10, 13, 0  
 
 
 
@@ -120,7 +120,7 @@ protect_mode:
 read_disk:
     ; 设置读写扇区的数量
     mov dx,0x1f2
-    mov al,cl
+    mov al,bl
     out dx,al
     
     inc dx      ; 0x1f3
@@ -226,5 +226,5 @@ gdt_end:
 
 
 ards_count:
-    dw 0
+    dd 0
 ards_buffer:

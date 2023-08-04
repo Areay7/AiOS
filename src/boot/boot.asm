@@ -4,7 +4,7 @@
 mov ax,3
 int 0x10
 
-; 初始化寄存器
+; 初始化段寄存器
 mov ax,0
 mov ds,ax
 mov es,ax
@@ -64,10 +64,10 @@ read_disk:
     mov cl,bl   ; 得到读写扇区的数量
 
     .read:
-        push cx ; 保存 cx
+        push ecx ; 保存 cx
         call .waits ; 等待数据准备完毕
         call .reads ; 读取一个扇区   
-        pop cx  ; 恢复 cx
+        pop ecx  ; 恢复 cx
         loop .read
 
     ret

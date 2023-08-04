@@ -24,7 +24,7 @@ outb:
     push ebp    ;
     mov ebp,esp ; 保存栈帧
     
-    xor edx,[ebp + 8]   ; port
+    mov edx,[ebp + 8]   ; port
     mov eax,[ebp + 12]  ; value
     out dx,al    ; 将端口号 al 的 8 bit 输入到 dx
 
@@ -57,7 +57,7 @@ outw:
     push ebp    ;
     mov ebp,esp ; 保存栈帧
     
-    xor edx,[ebp + 8]   ; port
+    mov edx,[ebp + 8]   ; port
     mov eax,[ebp + 12]  ; value
     out dx,ax    ; 将端口号 ax 的 8 bit 输入到 dx
 
